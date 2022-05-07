@@ -19,58 +19,66 @@
 ***此机器人 Valorant_bot (简称vb) 正在早期开发中***
 使用方式： @vb并使用以下命令 有的命令前需加上'/'或'!'。
 
-普通指令：
-    - 帮助
-    ```
-        用法：*可通过qq戳一戳使用此命令*
-             @vb /帮助 | help
-        说明：显示可用的命令
-    ```
-    - *开发中* 开黑 
-    ```
-        用法：@vb /开黑 | kaihei | kh <开黑公告>
-        会自动在机器人加入的群组内转发
-        例：
-        @vb /开黑 3等2 白金局 来能躺的 游戏id：XXX #xxx 开黑啦服务器：XXXXXXXX
-    ```
-管理员指令：
-    - *开发中* 添加群组
-    ```
-        用法：@vb /添加群组 | add_group <群组id>
-        说明：添加开黑公告通知群组
-    ```
-    - *开发中* 删除群组
-    ```
-        用法：@vb /删除群组 | del_group <群组id>
-        说明：删除开黑公告通知群组
-    ```
-    - *开发中* 显示群组
-    ```
-        用法：@vb /显示群组 | show_group
-        说明：显示群组
-    ```
+### 普通指令：
+- 帮助
 
-一些无聊的命令：
-    - 人生重开 
-    ```
-        用法：@vb /人生重开 | remake | liferestart | 人生重来
-        说明：人生重开
-    ```
-    - 疯狂星期四
-    ```
-        用法：疯狂星期四
-        说明：疯狂星期四
-    ```
-    - 随机唐可可
-    ```
-        用法：/随机唐可可|鲤鱼|鲤鱼王|Liyuu|liyuu <难度：简单|普通|困难|地狱>
-        说明：来找到唐可可吧
-    ```
-    - 每日一句
-    ```
-        用法：每日一句
-        说明：放点洋屁
-    ```
+    `用法：*可通过qq戳一戳使用此命令*
+         @vb /帮助 | help`
+         
+    `说明：显示可用的命令`
+- \*开发中\* 开黑
+
+    `用法：@vb /开黑 | kaihei | kh <开黑公告>`
+    
+    `说明：会自动在机器人加入的群组内转发`
+    
+    `例：
+    @vb /开黑 3等2 白金局 来能躺的 游戏id：XXX #xxx 开黑啦服务器：XXXXXXXX`
+
+### 管理员指令：
+- 添加群组
+
+    `用法：@vb /添加群组 | add_group <群组id>`
+    
+    `说明：添加开黑公告通知群组`
+
+- 删除群组
+
+    `用法：@vb /删除群组 | del_group <群组id>`
+
+    `说明：删除开黑公告通知群组`
+
+- 显示群组
+
+    `用法：@vb /显示群组 | show_group`
+
+    `说明：显示群组`
+
+### 一些无聊的命令：
+- 人生重开 
+
+    `用法：@vb /人生重开 | remake | liferestart | 人生重来`
+
+    `说明：人生重开`
+
+- 疯狂星期四
+
+    `用法：疯狂星期四`
+
+    `说明：疯狂星期四`
+
+- 随机唐可可
+
+    `用法：/随机唐可可|鲤鱼|鲤鱼王|Liyuu|liyuu <难度：简单|普通|困难|地狱>`
+
+    `说明：来找到唐可可吧`
+        
+- 每日一句
+
+    `用法：每日一句`
+
+    `说明：放点洋屁`
+
 
 
 ## 如何建立你的Valorant_bot
@@ -87,10 +95,34 @@
 - [nonebot_plugin_crazy_thursday](https://github.com/MinatoAquaCrews/nonebot_plugin_crazy_thursday)
 - [nonebot_plugin_everyday_en](https://github.com/MelodyYuuka/nonebot_plugin_everyday_en)
 - [nonebot-plugin-remake](https://github.com/noneplugin/nonebot-plugin-remake)
-
+- [nonebot-plugin-gocqhttp](https://github.com/mnixry/nonebot-plugin-gocqhttp)
 
 ## 说点题外话
 
 希望能帮助到玩瓦的大伙
 
 欢迎来提各种issue~
+
+## LISENCE
+
+REPO中包括了AGPLv3.0的[nonebot-plugin-gocqhttp](https://github.com/mnixry/nonebot-plugin-gocqhttp)
+故同使用AGPLv3.0
+
+```
+Valorant_bot includes go-cqhttp directly in NoneBot2, without additional download and installation.
+Copyright (C) 2022 Mix
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published
+by the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+```
+
