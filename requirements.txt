@@ -1,4 +1,6 @@
 nb_cli
+aiosqlite
+nonebot_plugin_apscheduler
 nonebot_plugin_gocqhttp
 nonebot_plugin_navicat
 nonebot_plugin_asoulcnki
