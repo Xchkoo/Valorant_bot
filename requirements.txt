@@ -1,4 +1,4 @@
-nonebot=2.0.0
+nb_cli
 nonebot_plugin_gocqhttp
 nonebot_plugin_navicat
 nonebot_plugin_asoulcnki
