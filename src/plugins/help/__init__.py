@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from nonebot.matcher import Matcher
-from nonebot.permission import SUPERUSER
-from nonebot import on_notice, get_driver, on_command, on_message
+from nonebot import on_notice, on_command, on_message
 from nonebot import get_driver
 from nonebot.rule import to_me
 from nonebot.adapters.onebot.v11 import Bot, Event

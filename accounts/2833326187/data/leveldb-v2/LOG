@@ -64,3 +64,13 @@
 09:31:58.240699 table@remove removed @8
 09:31:58.240699 table@remove removed @5
 09:31:58.240699 table@remove removed @2
+=============== May 7, 2022 (CST) ===============
+09:45:29.514695 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+09:45:29.530723 version@stat F·[0 2] S·2KiB[0B 2KiB] Sc·[0.00 0.00]
+09:45:29.530723 db@open opening
+09:45:29.531298 journal@recovery F·1
+09:45:29.531298 journal@recovery recovering @15
+09:45:29.578237 memdb@flush created L0@18 N·2 S·1KiB ",o\xc9\xc8,v20":"[h\xf9^,v19"
+09:45:29.578755 version@stat F·[1 2] S·4KiB[1KiB 2KiB] Sc·[0.25 0.00]
+09:45:29.733959 db@janitor F·5 G·0
+09:45:29.733959 db@open done T·203.2355ms

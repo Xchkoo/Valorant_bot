@@ -1,0 +1,8 @@
+nonebot=2.0.0
+nonebot_plugin_gocqhttp
+nonebot_plugin_navicat
+nonebot_plugin_asoulcnki
+nonebot_plugin_remake
+nonebot_plugin_crazy_thursday
+nonebot_plugin_randomtkk
+nonebot_plugin_everyday_en

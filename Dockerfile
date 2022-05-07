@@ -2,15 +2,13 @@ FROM python:3.9 as requirements-stage
 
 WORKDIR /tmp
 
-COPY ./pyproject.toml ./poetry.lock* /tmp/
+COPY ./pyproject.toml ./requirements.txt /tmp/
 
 RUN curl -sSL https://install.python-poetry.org -o install-poetry.py
 
-RUN python install-poetry.py --yes
+RUN python install -r requirements.txt
 
 ENV PATH="${PATH}:/root/.local/bin"
-
-RUN poetry export -f requirements.txt --output requirements.txt --without-hashes
 
 FROM tiangolo/uvicorn-gunicorn-fastapi:python3.9
 
