@@ -1,6 +1,5 @@
 version: "3"
 services:
-  # 其他配置参考 https://hub.docker.com/r/tiangolo/uvicorn-gunicorn-fastapi/
   nonebot:
     build: .
     container_name: nonebot

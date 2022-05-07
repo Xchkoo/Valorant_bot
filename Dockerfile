@@ -2,11 +2,7 @@ FROM python:3.9 as requirements-stage
 
 WORKDIR /tmp
 
-COPY ./pyproject.toml ./requirements.txt /tmp/
-
-RUN curl -sSL https://install.python-poetry.org -o install-poetry.py
-
-RUN pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+COPY ./requirements.txt /tmp/
 
 ENV PATH="${PATH}:/root/.local/bin"
 
