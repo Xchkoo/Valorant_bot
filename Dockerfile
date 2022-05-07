@@ -6,7 +6,7 @@ COPY ./pyproject.toml ./requirements.txt /tmp/
 
 RUN curl -sSL https://install.python-poetry.org -o install-poetry.py
 
-RUN python install -r requirements.txt
+RUN pip install -r requirements.txt
 
 ENV PATH="${PATH}:/root/.local/bin"
 
