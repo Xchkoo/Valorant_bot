@@ -33,19 +33,6 @@ async def help_handle(bot: Bot, event: Event):
         例：
         @vb /开黑 3等2 白金局 来能躺的 游戏id：XXX #xxx 开黑啦服务器：XXXXXXXX
 
-
-    管理员指令：
-    - *开发中* 添加群组
-        用法：@vb /添加群组 | add_group <群组id>
-        说明：添加开黑公告通知群组
-    - *开发中* 删除群组
-        用法：@vb /删除群组 | del_group <群组id>
-        说明：删除开黑公告通知群组
-    - *开发中* 显示群组
-        用法：@vb /显示群组 | show_group
-        说明：显示群组
-
-
     一些无聊的命令：
     - 人生重开 
         用法：@vb /人生重开 | remake | liferestart | 人生重来

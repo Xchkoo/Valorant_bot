@@ -20,7 +20,7 @@ global_config = get_driver().config
 plugin_config = Config.parse_obj(get_driver().config)
 
 kaihei = on_command(
-    cmd="开黑", rule=to_me(), aliases={'kaihei', 'kh'}, priority=10, block=True
+    cmd="开黑", aliases={'kaihei', 'kh'}, priority=10, block=True
 )
 
 
@@ -34,6 +34,7 @@ async def handle_first_receive(state: T_State, args: Message = CommandArg()):
 @kaihei.got("kaihei_text", prompt="请输入广播内容：")
 async def handle_group_message(event: Event, bot: Bot, state: T_State, kaihei_text: str = Arg()):
     data = []
+    error_msg=[]
     msg = Message(f'[CQ:at,qq={event.get_user_id()}]' + "向全体瓦罗兰特玩家公告：\n") + kaihei_text
     try:
         query = "SELECT * FROM QQGROUP"
@@ -41,10 +42,17 @@ async def handle_group_message(event: Event, bot: Bot, state: T_State, kaihei_te
         for col in rows:
             group_id = col[1]
             data.append("\n" + str(group_id))
-            await bot.send_group_msg(group_id=group_id, message=msg)
+            try:
+                await bot.send_group_msg(group_id=group_id, message=msg)
+            except:
+                error_msg.append("无法发送信息至 "+str(group_id)+" 可能被禁言或被风控\n")
     except:
-        await add_group.finish("ERROR: 数据库出现问题")
-    await kaihei.finish("公告完毕!\n\n公告内容：\n" + msg + "\n\n公告群组：" + data)
+        await add_group.finish("ERROR: "+"数据库错误\n"+traceback.format_exc())
+    finally:
+        if error_msg:
+            await kaihei.finish("公告失败!\n\n失败原因：\n" + error_msg + "\n公告内容：\n" + msg + "\n\n公告群组：" + data)
+        else:
+            await kaihei.finish("公告完毕!\n\n公告内容：\n" + msg + "\n\n公告群组：" + data)
 
 
 add_group = on_command(
@@ -77,7 +85,7 @@ async def handle_first_receive(state: T_State, args: Message = CommandArg()):
         state["group_id"] = int(plaintext)
 
 
-@add_group.got("group_id", prompt="请输入一个群组id：", parameterless=[Depends(parse_int("group_id"))])
+@add_group.got("group_id", prompt="请输入一个群组id", parameterless=[Depends(parse_int("group_id"))])
 async def handle_group_message(bot: Bot, group_id: int = Arg()):
     await export.sqlite_pool.connect()
     try:
@@ -89,8 +97,15 @@ async def handle_group_message(bot: Bot, group_id: int = Arg()):
         await add_group.finish("ERROR: 出现重复群组")
     except:
         await add_group.finish("ERROR: 数据库出现问题")
-    await bot.send_group_msg(group_id=group_id, message="此群已被添加到Valorant_bot开黑叫人服务 若有错误 请管理员联系1524049410")
-    await add_group.finish("添加" + str(group_id) + "完毕")
+    try:
+        await bot.send_group_msg(group_id=group_id, message="此群已被添加到Valorant_bot开黑叫人服务 若有错误 请管理员联系1524049410")
+    except:
+        error_msg = "无法对" + str(group_id) + "发送被添加信息 可能被禁言或被风控"
+    finally:
+        if error_msg:
+            await add_group.finish("添加" + str(group_id) + "可能失败\n" + error_msg)
+        else:
+            await add_group.finish("添加" + str(group_id) + "完毕")
 
 
 del_group = on_command(cmd="删除群组", aliases={'del_group'}, permission=SUPERUSER, priority=10, block=False)
@@ -103,7 +118,7 @@ async def handle_first_receive(state: T_State, args: Message = CommandArg()):
         state["group_id"] = int(plaintext)
 
 
-@del_group.got("group_id", prompt="请输入一个群组id：", parameterless=[Depends(parse_int("group_id"))])
+@del_group.got("group_id", prompt="请输入一个群组id", parameterless=[Depends(parse_int("group_id"))])
 async def handle_group_message(bot: Bot, group_id: int = Arg()):
     await export.sqlite_pool.connect()
     try:
@@ -113,15 +128,14 @@ async def handle_group_message(bot: Bot, group_id: int = Arg()):
         try:
             await bot.send_group_msg(group_id=group_id, message="此群已从Valorant_bot开黑叫人服务中删除 若有错误 请管理员联系1524049410")
         except:
-            traceback.print_exc()
-            await del_group.finish
+            error_msg = "无法对" + str(group_id) + "发送被删除信息 可能被禁言或被风控"
     except IntegrityError:
         traceback.print_exc()
-        await del_group.finish("ERROR: 数据库中无需删除群组")
+        await del_group.finish("ERROR: 数据库中无此群组")
     except:
         await del_group.finish("ERROR: 数据库出现问题")
 
-    await del_group.finish("删除" + str(group_id) + "完毕")
+    await del_group.finish("删除" + str(group_id) + "可能失败\n" + error_msg)
 
 
 show_group = on_command(cmd="显示群组", aliases={'show_group'}, permission=SUPERUSER, priority=10, block=False)
