@@ -55,8 +55,8 @@ async def _(bot: Bot):
 async def blacklist_checker(event: Event) -> bool:
     id = event.get_user_id()
     if id in b.data:
-        return False
-    return True
+        return True
+    return False
 
 
 kaihei = on_command(

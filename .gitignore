@@ -143,3 +143,7 @@ dmypy.json
 *.exe
 
 accounts/
+
+.env.dev
+
+.env.prod
