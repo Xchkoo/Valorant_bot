@@ -7,18 +7,19 @@ from nonebot.rule import to_me
 from nonebot.adapters.onebot.v11 import Bot, Event
 from nonebot.adapters.onebot.v11.message import Message
 
-
 global_config = get_driver().config
-# status_config = Config(**global_config.dict())
 
-help = on_command(cmd="帮助", aliases={'help'}, rule=to_me(), priority=10)
 
+help = on_command(cmd="帮助", aliases={'help'}, priority=10)
+
+
+# [CQ:at,qq={event.get_user_id()}]
 @help.handle()
-async def help_handle(bot: Bot, event: Event):
-    data = \
-    f"""
-    [CQ:at,qq={event.get_user_id()}]: 欢迎使用Valorant_bot!
-    ***此机器人 Valorant_bot (简称vb) 正在早期开发中，bug反馈联系qq1524049410。***
+async def help_handle(event: Event):
+    msg = \
+        """
+    欢迎使用Valorant_bot!
+    开源仓库：github.com/Xchkoo/Valorant_bot
     
     
     使用方式： @vb并使用以下命令 有的命令前需加上'/'或'!'。
@@ -27,11 +28,11 @@ async def help_handle(bot: Bot, event: Event):
         用法：*可通过qq戳一戳使用此命令*
              @vb /帮助 | help
         说明：显示可用的命令
-    - *开发中* 开黑 
-        用法：@vb /开黑 | kaihei | kh <开黑公告>
+    - 开黑 
+        用法：@vb /开黑 | kaihei | kh <游戏id> <补充信息>
         会自动在机器人加入的群组内转发
         例：
-        @vb /开黑 3等2 白金局 来能躺的 游戏id：XXX #xxx 开黑啦服务器：XXXXXXXX
+        @vb /开黑 XXX#xxx(游戏id) 3等2 白金局 来能躺的
 
     一些无聊的命令：
     - 人生重开 
@@ -48,7 +49,7 @@ async def help_handle(bot: Bot, event: Event):
         说明：放点洋屁
 
     """
-    await help.finish(Message(data))
+    await help.finish(Message(msg))
 
 
 try:
