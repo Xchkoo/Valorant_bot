@@ -68,7 +68,7 @@ kaihei = on_command(
 async def handle_first_receive(state: T_State, event: Event, args: Message = CommandArg()):
     if await blacklist_checker(event):
         await kaihei.finish(message="你已被系统封禁！")
-    await kaihei.send(message="注意！此消息将被发往多个群组，请注意言行! 发送大量无关信息将被屏蔽！")
+    await kaihei.send(message=Message(f"[CQ:at,qq={event.get_user_id()}]注意！此消息将被发往多个群组，请注意言行! 发送大量无关信息将被屏蔽！"))
     argsList = args.extract_plain_text().split(" ", 1)
     if len(argsList) == 0 or argsList[0] == '':
         return
@@ -89,7 +89,7 @@ async def handle_group_message(
 ):
     data = ''
     error_msg = ''
-    msg = Message(f"[CQ:at,qq={event.get_user_id()}](游戏内id：" + id + ")" + "向全体瓦罗兰特玩家公告：\n") + kaihei_text
+    msg = f"[CQ:at,qq={event.get_user_id()}](游戏内id：{id}) 向全体瓦罗兰特玩家公告：\n{kaihei_text}"
     try:
         query = "SELECT * FROM QQGROUP"
         rows = await export.sqlite_pool.fetch_all(query=query)
@@ -99,14 +99,14 @@ async def handle_group_message(
             try:
                 await bot.send_group_msg(group_id=group_id, message=Message(msg))
             except:
-                error_msg += "无法发送信息至 "+str(group_id)+" 可能被禁言或被风控\n"
+                error_msg += f"无法发送信息至 {str(group_id)} 可能被禁言或被风控\n"
     except:
         await add_group.finish("ERROR: "+"数据库错误\n"+traceback.format_exc())
     finally:
         if error_msg != '':
-            await kaihei.finish("公告失败!\n\n失败原因：\n" + error_msg + "\n公告内容：\n" + msg + "\n\n公告群组：" + data)
+            await kaihei.finish(Message(f"公告失败!\n\n失败原因：\n{error_msg}\n公告内容：\n{msg}\n\n公告群组：{data}"))
         else:
-            await kaihei.finish("公告完毕!\n\n公告内容：\n" + Message(msg) + "\n\n公告群组：" + str(data))
+            await kaihei.finish(Message(f"公告完毕!\n\n公告内容：\n{msg}\n\n公告群组：{data}"))
 
 
 add_group = on_command(
