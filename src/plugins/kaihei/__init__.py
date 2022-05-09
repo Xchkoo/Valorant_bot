@@ -26,16 +26,19 @@ kaihei = on_command(
 
 @kaihei.handle()
 async def handle_first_receive(state: T_State, args: Message = CommandArg()):
+    kaihei.send(message="注意！此消息将被发往多个群组，请注意言行! 发送大量无关信息将被屏蔽！")
     plaintext = args.extract_plain_text()
     if plaintext:
+        state["id"]
         state["kaihei_text"] = plaintext
 
 
-@kaihei.got("kaihei_text", prompt="请输入广播内容：")
-async def handle_group_message(event: Event, bot: Bot, state: T_State, kaihei_text: str = Arg()):
+@kaihei.got("id", prompt="请输入游戏内id：")
+@kaihei.got("kaihei_text", prompt="请输入补充信息：")
+async def handle_group_message(event: Event, bot: Bot, state: T_State, kaihei_text: str = Arg(), id: str = Arg()):
     data = []
     error_msg=[]
-    msg = Message(f'[CQ:at,qq={event.get_user_id()}]' + "向全体瓦罗兰特玩家公告：\n") + kaihei_text
+    msg = Message(f"[CQ:at,qq={event.get_user_id()}](游戏内id："+ id +")" + "向全体瓦罗兰特玩家公告：\n") + kaihei_text
     try:
         query = "SELECT * FROM QQGROUP"
         rows = await export.sqlite_pool.fetch_all(query=query)
